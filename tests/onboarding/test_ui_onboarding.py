@@ -6,9 +6,9 @@ import pytest
 from textual.pilot import Pilot
 from textual.widgets import Input
 
-from vibe.core.paths.global_paths import GLOBAL_ENV_FILE
-from vibe.setup.onboarding import OnboardingApp
-from vibe.setup.onboarding.screens.api_key import ApiKeyScreen
+from albert_code.core.paths.global_paths import GLOBAL_ENV_FILE
+from albert_code.setup.onboarding import OnboardingApp
+from albert_code.setup.onboarding.screens.api_key import ApiKeyScreen
 
 
 async def _wait_for(
@@ -53,5 +53,5 @@ async def test_ui_gets_through_the_onboarding_successfully() -> None:
 
     assert GLOBAL_ENV_FILE.path.is_file()
     env_contents = GLOBAL_ENV_FILE.path.read_text(encoding="utf-8")
-    assert "MISTRAL_API_KEY" in env_contents
+    assert "ALBERT_API_KEY" in env_contents
     assert api_key_value in env_contents

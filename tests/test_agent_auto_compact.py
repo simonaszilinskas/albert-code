@@ -5,7 +5,7 @@ import pytest
 from tests.conftest import build_test_agent_loop, build_test_vibe_config
 from tests.mock.utils import mock_llm_chunk
 from tests.stubs.fake_backend import FakeBackend
-from vibe.core.types import (
+from albert_code.core.types import (
     AssistantEvent,
     CompactEndEvent,
     CompactStartEvent,
@@ -44,7 +44,7 @@ async def test_auto_compact_emits_correct_events(telemetry_events: list[dict]) -
     auto_compact = [
         e
         for e in telemetry_events
-        if e.get("event_name") == "vibe.auto_compact_triggered"
+        if e.get("event_name") == "albert_code.auto_compact_triggered"
     ]
     assert len(auto_compact) == 1
 

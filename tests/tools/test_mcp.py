@@ -9,8 +9,8 @@ from unittest.mock import MagicMock, patch
 from pydantic import ValidationError
 import pytest
 
-from vibe.core.config import MCPHttp, MCPStdio, MCPStreamableHttp
-from vibe.core.tools.mcp import (
+from albert_code.core.config import MCPHttp, MCPStdio, MCPStreamableHttp
+from albert_code.core.tools.mcp import (
     MCPRegistry,
     MCPToolResult,
     RemoteTool,
@@ -141,7 +141,7 @@ class TestMCPStderrCapture:
     def test_stderr_logger_thread_logs_decoded_lines(self):
         r_fd, w_fd = os.pipe()
         try:
-            vibe_logger = logging.getLogger("vibe")
+            vibe_logger = logging.getLogger("albert_code")
             with patch.object(vibe_logger, "debug") as debug_mock:
                 thread = threading.Thread(
                     target=_stderr_logger_thread, args=(r_fd,), daemon=True
@@ -171,7 +171,7 @@ class TestMCPStderrCapture:
 
     @pytest.mark.asyncio
     async def test_mcp_stderr_capture_logs_written_data(self):
-        vibe_logger = logging.getLogger("vibe")
+        vibe_logger = logging.getLogger("albert_code")
         with patch.object(vibe_logger, "debug") as debug_mock:
             async with _mcp_stderr_capture() as stream:
                 stream.write("captured line\n")
@@ -180,7 +180,7 @@ class TestMCPStderrCapture:
 
     @pytest.mark.asyncio
     async def test_mcp_stderr_capture_ignores_empty_lines(self):
-        vibe_logger = logging.getLogger("vibe")
+        vibe_logger = logging.getLogger("albert_code")
         with patch.object(vibe_logger, "debug") as debug_mock:
             async with _mcp_stderr_capture() as stream:
                 stream.write("\n\n")
@@ -478,7 +478,7 @@ class TestMCPRegistry:
         remote = RemoteTool(name="hello", description="Hi")
 
         with patch(
-            "vibe.core.tools.mcp.registry.list_tools_http", return_value=[remote]
+            "albert_code.core.tools.mcp.registry.list_tools_http", return_value=[remote]
         ):
             tools = await registry._discover_http(srv)
 
@@ -493,7 +493,7 @@ class TestMCPRegistry:
         srv = self._make_http_server("fail", url="http://fail:1")
 
         with patch(
-            "vibe.core.tools.mcp.registry.list_tools_http",
+            "albert_code.core.tools.mcp.registry.list_tools_http",
             side_effect=ConnectionError("down"),
         ):
             tools = await registry._discover_http(srv)
@@ -507,7 +507,7 @@ class TestMCPRegistry:
         remote = RemoteTool(name="run", description="Run it")
 
         with patch(
-            "vibe.core.tools.mcp.registry.list_tools_stdio", return_value=[remote]
+            "albert_code.core.tools.mcp.registry.list_tools_stdio", return_value=[remote]
         ):
             tools = await registry._discover_stdio(srv)
 
@@ -522,7 +522,7 @@ class TestMCPRegistry:
         srv = self._make_stdio_server("broken")
 
         with patch(
-            "vibe.core.tools.mcp.registry.list_tools_stdio",
+            "albert_code.core.tools.mcp.registry.list_tools_stdio",
             side_effect=OSError("no binary"),
         ):
             tools = await registry._discover_stdio(srv)
@@ -544,7 +544,7 @@ class TestMCPRegistry:
 
         new_remote = RemoteTool(name="nt")
         with patch(
-            "vibe.core.tools.mcp.registry.list_tools_http", return_value=[new_remote]
+            "albert_code.core.tools.mcp.registry.list_tools_http", return_value=[new_remote]
         ):
             tools = registry.get_tools([cached_srv, new_srv])
 

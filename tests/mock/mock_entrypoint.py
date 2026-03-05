@@ -14,14 +14,14 @@ from unittest.mock import patch
 
 from pydantic import ValidationError
 
-from vibe.core.paths.config_paths import unlock_config_paths
+from albert_code.core.paths.config_paths import unlock_config_paths
 
 if __name__ == "__main__":
     unlock_config_paths()
 
     from tests import TESTS_ROOT
     from tests.mock.utils import MOCK_DATA_ENV_VAR
-    from vibe.core.types import LLMChunk
+    from albert_code.core.types import LLMChunk
 
     sys.path.insert(0, str(TESTS_ROOT))
 
@@ -44,22 +44,22 @@ if __name__ == "__main__":
         yield next(chunk_iterable)
 
     patch(
-        "vibe.core.llm.backend.mistral.MistralBackend.complete",
+        "albert_code.core.llm.backend.mistral.MistralBackend.complete",
         side_effect=mock_complete,
     ).start()
     patch(
-        "vibe.core.llm.backend.generic.GenericBackend.complete",
+        "albert_code.core.llm.backend.generic.GenericBackend.complete",
         side_effect=mock_complete,
     ).start()
     patch(
-        "vibe.core.llm.backend.mistral.MistralBackend.complete_streaming",
+        "albert_code.core.llm.backend.mistral.MistralBackend.complete_streaming",
         side_effect=mock_complete_streaming,
     ).start()
     patch(
-        "vibe.core.llm.backend.generic.GenericBackend.complete_streaming",
+        "albert_code.core.llm.backend.generic.GenericBackend.complete_streaming",
         side_effect=mock_complete_streaming,
     ).start()
 
-    from vibe.acp.entrypoint import main
+    from albert_code.acp.entrypoint import main
 
     main()

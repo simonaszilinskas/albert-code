@@ -4,11 +4,11 @@ from datetime import UTC, datetime, timedelta
 
 import pytest
 
-from vibe.cli.textual_ui.widgets.session_picker import (
+from albert_code.cli.textual_ui.widgets.session_picker import (
     SessionPickerApp,
     _format_relative_time,
 )
-from vibe.core.session.session_loader import SessionInfo
+from albert_code.core.session.session_loader import SessionInfo
 
 
 @pytest.fixture

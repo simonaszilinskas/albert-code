@@ -5,8 +5,8 @@ import pytest
 import respx
 
 from tests.mock.utils import collect_result
-from vibe.core.tools.base import BaseToolState, ToolError
-from vibe.core.tools.builtins.webfetch import WebFetch, WebFetchArgs, WebFetchConfig
+from albert_code.core.tools.base import BaseToolState, ToolError
+from albert_code.core.tools.builtins.webfetch import WebFetch, WebFetchArgs, WebFetchConfig
 
 
 @pytest.fixture
@@ -139,7 +139,7 @@ async def test_cloudflare_retry_on_challenge(webfetch):
     assert route.call_count == 2
 
     second_request = route.calls[1].request
-    assert second_request.headers["User-Agent"] == "vibe-cli"
+    assert second_request.headers["User-Agent"] == "albert-code-cli"
 
 
 @pytest.mark.asyncio

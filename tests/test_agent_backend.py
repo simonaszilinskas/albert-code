@@ -13,15 +13,15 @@ import pytest
 from tests.conftest import build_test_agent_loop, build_test_vibe_config
 from tests.mock.utils import mock_llm_chunk
 from tests.stubs.fake_backend import FakeBackend
-from vibe.core.config import Backend, ModelConfig, ProviderConfig, VibeConfig
-from vibe.core.types import EntrypointMetadata
+from albert_code.core.config import Backend, ModelConfig, ProviderConfig, VibeConfig
+from albert_code.core.types import EntrypointMetadata
 
 
 def _two_model_vibe_config(active_model: str) -> VibeConfig:
     """VibeConfig with two models so we can switch active_model."""
     models = [
         ModelConfig(
-            name="mistral-vibe-cli-latest", provider="mistral", alias="devstral-latest"
+            name="albert-code-cli-latest", provider="mistral", alias="devstral-latest"
         ),
         ModelConfig(
             name="devstral-small-latest", provider="mistral", alias="devstral-small"
@@ -178,7 +178,7 @@ async def test_mcp_sampling_handler_uses_updated_config_when_agent_config_change
 
     result1 = await handler(context, params)
     assert isinstance(result1, CreateMessageResult)
-    assert result1.model == "mistral-vibe-cli-latest"
+    assert result1.model == "albert-code-cli-latest"
 
     agent._base_config = config2
     agent.agent_manager.invalidate_config()

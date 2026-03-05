@@ -33,8 +33,8 @@ import tomli_w
 from tests import TESTS_ROOT
 from tests.conftest import get_base_config
 from tests.mock.utils import get_mocking_env, mock_llm_chunk
-from vibe.acp.utils import ToolOption
-from vibe.core.types import FunctionCall, ToolCall
+from albert_code.acp.utils import ToolOption
+from albert_code.core.types import FunctionCall, ToolCall
 
 RESPONSE_TIMEOUT = 2.0
 MOCK_ENTRYPOINT_PATH = "tests/mock/mock_entrypoint.py"
@@ -64,7 +64,7 @@ def deep_merge(target: dict, source: dict) -> None:
 
 def _create_vibe_home_dir(tmp_path: Path, *sections: dict[str, Any]) -> Path:
     """Create a temporary vibe home directory with a minimal config file."""
-    vibe_home = tmp_path / ".vibe"
+    vibe_home = tmp_path / ".albert-code"
     vibe_home.mkdir()
 
     config_file = vibe_home / "config.toml"
@@ -73,7 +73,7 @@ def _create_vibe_home_dir(tmp_path: Path, *sections: dict[str, Any]) -> Path:
     base_config_dict["active_model"] = "devstral-latest"
     if base_config_dict.get("models"):
         for model in base_config_dict["models"]:
-            if model.get("name") == "mistral-vibe-cli-latest":
+            if model.get("name") == "albert-code-cli-latest":
                 model["alias"] = "devstral-latest"
 
     if sections:
@@ -198,7 +198,7 @@ async def get_acp_agent_loop_process(
     env = dict(current_env)
     env.update(mock_env)
     env["MISTRAL_API_KEY"] = "mock"
-    env["VIBE_HOME"] = str(vibe_home)
+    env["ALBERT_CODE_HOME"] = str(vibe_home)
 
     process = await asyncio.create_subprocess_exec(
         *cmd,

@@ -366,7 +366,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Rename agent in distribution/zed/extension.toml to mistral-vibe
+- Rename agent in distribution/zed/extension.toml to albert-code
 
 ### Fixed
 

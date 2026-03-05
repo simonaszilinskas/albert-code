@@ -5,10 +5,10 @@ from pathlib import Path
 
 import pytest
 
-from vibe.cli.history_manager import HistoryManager
-from vibe.cli.textual_ui.app import VibeApp
-from vibe.cli.textual_ui.widgets.chat_input.body import ChatInputBody
-from vibe.cli.textual_ui.widgets.chat_input.container import ChatInputContainer
+from albert_code.cli.history_manager import HistoryManager
+from albert_code.cli.textual_ui.app import VibeApp
+from albert_code.cli.textual_ui.widgets.chat_input.body import ChatInputBody
+from albert_code.cli.textual_ui.widgets.chat_input.container import ChatInputContainer
 
 
 @pytest.fixture

@@ -7,9 +7,9 @@ from textual.content import Content
 from textual.style import Style
 from textual.widgets import Markdown
 
-from vibe.cli.textual_ui.app import VibeApp
-from vibe.cli.textual_ui.widgets.chat_input.completion_popup import CompletionPopup
-from vibe.cli.textual_ui.widgets.chat_input.container import ChatInputContainer
+from albert_code.cli.textual_ui.app import VibeApp
+from albert_code.cli.textual_ui.widgets.chat_input.completion_popup import CompletionPopup
+from albert_code.cli.textual_ui.widgets.chat_input.container import ChatInputContainer
 
 
 @pytest.mark.asyncio
@@ -118,7 +118,7 @@ async def test_pressing_enter_submits_selected_command_and_hides_popup(
         slash_used = [
             e
             for e in telemetry_events
-            if e.get("event_name") == "vibe.slash_command_used"
+            if e.get("event_name") == "albert_code.slash_command_used"
         ]
         assert any(
             e.get("properties", {}).get("command") == "help"
@@ -137,9 +137,9 @@ def file_tree(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     (tmp_path / "src" / "utils" / "sanitize.py").write_text("", encoding="utf-8")
     (tmp_path / "src" / "utils" / "validate.py").write_text("", encoding="utf-8")
     (tmp_path / "src" / "main.py").write_text("", encoding="utf-8")
-    (tmp_path / "vibe" / "acp").mkdir(parents=True)
-    (tmp_path / "vibe" / "acp" / "entrypoint.py").write_text("", encoding="utf-8")
-    (tmp_path / "vibe" / "acp" / "agent.py").write_text("", encoding="utf-8")
+    (tmp_path / "albert_code" / "acp").mkdir(parents=True)
+    (tmp_path / "albert_code" / "acp" / "entrypoint.py").write_text("", encoding="utf-8")
+    (tmp_path / "albert_code" / "acp" / "agent.py").write_text("", encoding="utf-8")
     (tmp_path / "README.md").write_text("", encoding="utf-8")
     (tmp_path / ".env").write_text("", encoding="utf-8")
     monkeypatch.chdir(tmp_path)
@@ -258,7 +258,7 @@ async def test_finds_files_recursively_by_filename(
         await pilot.press(*"@entryp")
 
         popup_content = str(popup.render())
-        assert "@vibe/acp/entrypoint.py" in popup_content
+        assert "@albert_code/acp/entrypoint.py" in popup_content
         assert popup.styles.display == "block"
 
 
@@ -272,7 +272,7 @@ async def test_finds_files_recursively_with_partial_path(
         await pilot.press(*"@acp/entry")
 
         popup_content = str(popup.render())
-        assert "@vibe/acp/entrypoint.py" in popup_content
+        assert "@albert_code/acp/entrypoint.py" in popup_content
         assert popup.styles.display == "block"
 
 

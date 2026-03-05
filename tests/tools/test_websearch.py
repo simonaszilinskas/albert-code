@@ -6,8 +6,8 @@ import mistralai
 import pytest
 
 from tests.mock.utils import collect_result
-from vibe.core.tools.base import BaseToolState, ToolError
-from vibe.core.tools.builtins.websearch import WebSearch, WebSearchArgs, WebSearchConfig
+from albert_code.core.tools.base import BaseToolState, ToolError
+from albert_code.core.tools.builtins.websearch import WebSearch, WebSearchArgs, WebSearchConfig
 
 
 def _make_response(

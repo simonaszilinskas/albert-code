@@ -1,9 +1,9 @@
-# Mistral Vibe
+# Albert Code
 
-[![PyPI Version](https://img.shields.io/pypi/v/mistral-vibe)](https://pypi.org/project/mistral-vibe)
+[![PyPI Version](https://img.shields.io/pypi/v/albert-code)](https://pypi.org/project/albert-code)
 [![Python Version](https://img.shields.io/badge/python-3.12%2B-blue)](https://www.python.org/downloads/release/python-3120/)
-[![CI Status](https://github.com/mistralai/mistral-vibe/actions/workflows/ci.yml/badge.svg)](https://github.com/mistralai/mistral-vibe/actions/workflows/ci.yml)
-[![License](https://img.shields.io/github/license/mistralai/mistral-vibe)](https://github.com/mistralai/mistral-vibe/blob/main/LICENSE)
+[![CI Status](https://github.com/mistralai/albert-code/actions/workflows/ci.yml/badge.svg)](https://github.com/mistralai/albert-code/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/mistralai/albert-code)](https://github.com/mistralai/albert-code/blob/main/LICENSE)
 
 ```
 ██████████████████░░
@@ -19,10 +19,10 @@
 
 **Mistral's open-source CLI coding assistant.**
 
-Mistral Vibe is a command-line coding assistant powered by Mistral's models. It provides a conversational interface to your codebase, allowing you to use natural language to explore, modify, and interact with your projects through a powerful set of tools.
+Albert Code is a command-line coding assistant powered by Mistral's models. It provides a conversational interface to your codebase, allowing you to use natural language to explore, modify, and interact with your projects through a powerful set of tools.
 
 > [!WARNING]
-> Mistral Vibe works on Windows, but we officially support and target UNIX environments.
+> Albert Code works on Windows, but we officially support and target UNIX environments.
 
 ### One-line install (recommended)
 
@@ -44,13 +44,13 @@ Then, use uv command below.
 ### Using uv
 
 ```bash
-uv tool install mistral-vibe
+uv tool install albert-code
 ```
 
 ### Using pip
 
 ```bash
-pip install mistral-vibe
+pip install albert-code
 ```
 
 ## Table of Contents
@@ -600,7 +600,7 @@ This affects where Vibe looks for:
 
 ## Editors/IDEs
 
-Mistral Vibe can be used in text editors and IDEs that support [Agent Client Protocol](https://agentclientprotocol.com/overview/clients). See the [ACP Setup documentation](docs/acp-setup.md) for setup instructions for various editors and IDEs.
+Albert Code can be used in text editors and IDEs that support [Agent Client Protocol](https://agentclientprotocol.com/overview/clients). See the [ACP Setup documentation](docs/acp-setup.md) for setup instructions for various editors and IDEs.
 
 ## Resources
 

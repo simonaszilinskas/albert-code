@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from contextlib import contextmanager
 
-from vibe.core.config import Backend
-from vibe.core.llm.backend.factory import BACKEND_FACTORY
+from albert_code.core.config import Backend
+from albert_code.core.llm.backend.factory import BACKEND_FACTORY
 
 
 @contextmanager

@@ -7,8 +7,8 @@ from unittest.mock import patch
 import pytest
 import tomli_w
 
-from vibe.core.paths.global_paths import TRUSTED_FOLDERS_FILE
-from vibe.core.trusted_folders import (
+from albert_code.core.paths.global_paths import TRUSTED_FOLDERS_FILE
+from albert_code.core.trusted_folders import (
     AGENTS_MD_FILENAMES,
     TrustedFoldersManager,
     has_agents_md_file,
@@ -218,26 +218,26 @@ class TestHasAgentsMdFile:
         (tmp_path / "AGENTS.md").write_text("# Agents", encoding="utf-8")
         assert has_agents_md_file(tmp_path) is True
 
-    def test_returns_true_when_vibe_md_exists(self, tmp_path: Path) -> None:
-        (tmp_path / "VIBE.md").write_text("# Vibe", encoding="utf-8")
+    def test_returns_true_when_albert_code_md_exists(self, tmp_path: Path) -> None:
+        (tmp_path / "ALBERT_CODE.md").write_text("# Albert Code", encoding="utf-8")
         assert has_agents_md_file(tmp_path) is True
 
-    def test_returns_true_when_dot_vibe_md_exists(self, tmp_path: Path) -> None:
-        (tmp_path / ".vibe.md").write_text("# Vibe", encoding="utf-8")
+    def test_returns_true_when_dot_albert_code_md_exists(self, tmp_path: Path) -> None:
+        (tmp_path / ".albert-code.md").write_text("# Albert Code", encoding="utf-8")
         assert has_agents_md_file(tmp_path) is True
 
     def test_returns_false_when_only_other_files_exist(self, tmp_path: Path) -> None:
         (tmp_path / "README.md").write_text("", encoding="utf-8")
-        (tmp_path / ".vibe").mkdir()
+        (tmp_path / ".albert-code").mkdir()
         assert has_agents_md_file(tmp_path) is False
 
     def test_agents_md_filenames_constant(self) -> None:
-        assert AGENTS_MD_FILENAMES == ["AGENTS.md", "VIBE.md", ".vibe.md"]
+        assert AGENTS_MD_FILENAMES == ["AGENTS.md", "ALBERT_CODE.md", ".albert-code.md"]
 
 
 class TestHasTrustableContent:
     def test_returns_true_when_vibe_dir_exists(self, tmp_path: Path) -> None:
-        (tmp_path / ".vibe" / "skills").mkdir(parents=True)
+        (tmp_path / ".albert-code" / "skills").mkdir(parents=True)
         assert has_trustable_content(tmp_path) is True
 
     def test_returns_true_when_agents_dir_exists(self, tmp_path: Path) -> None:
@@ -255,7 +255,7 @@ class TestHasTrustableContent:
         assert has_trustable_content(tmp_path) is False
 
     def test_returns_true_when_vibe_config_in_subfolder(self, tmp_path: Path) -> None:
-        (tmp_path / "sub" / ".vibe" / "skills").mkdir(parents=True)
+        (tmp_path / "sub" / ".albert-code" / "skills").mkdir(parents=True)
         assert has_trustable_content(tmp_path) is True
 
     def test_returns_true_when_agents_skills_in_subfolder(self, tmp_path: Path) -> None:
@@ -265,5 +265,5 @@ class TestHasTrustableContent:
     def test_returns_false_when_config_only_inside_ignored_dir(
         self, tmp_path: Path
     ) -> None:
-        (tmp_path / "node_modules" / ".vibe" / "skills").mkdir(parents=True)
+        (tmp_path / "node_modules" / ".albert-code" / "skills").mkdir(parents=True)
         assert has_trustable_content(tmp_path) is False

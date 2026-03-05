@@ -5,8 +5,8 @@ import shutil
 import pytest
 
 from tests.mock.utils import collect_result
-from vibe.core.tools.base import BaseToolState, ToolError
-from vibe.core.tools.builtins.grep import Grep, GrepArgs, GrepBackend, GrepToolConfig
+from albert_code.core.tools.base import BaseToolState, ToolError
+from albert_code.core.tools.builtins.grep import Grep, GrepArgs, GrepBackend, GrepToolConfig
 
 
 @pytest.fixture
@@ -161,7 +161,7 @@ async def test_respects_default_ignore_patterns(grep, tmp_path):
 
 @pytest.mark.asyncio
 async def test_respects_vibeignore_file(grep, tmp_path):
-    (tmp_path / ".vibeignore").write_text("custom_dir/\n*.tmp\n")
+    (tmp_path / ".albertignore").write_text("custom_dir/\n*.tmp\n")
     custom_dir = tmp_path / "custom_dir"
     custom_dir.mkdir()
     (custom_dir / "excluded.py").write_text("match\n")
@@ -177,7 +177,7 @@ async def test_respects_vibeignore_file(grep, tmp_path):
 
 @pytest.mark.asyncio
 async def test_ignores_comments_in_vibeignore(grep, tmp_path):
-    (tmp_path / ".vibeignore").write_text("# comment\npattern/\n# another comment\n")
+    (tmp_path / ".albertignore").write_text("# comment\npattern/\n# another comment\n")
     (tmp_path / "file.py").write_text("match\n")
 
     result = await collect_result(grep.run(GrepArgs(pattern="match")))
@@ -276,7 +276,7 @@ class TestGnuGrepBackend:
 
     @pytest.mark.asyncio
     async def test_respects_vibeignore_file(self, grep_gnu_only, tmp_path):
-        (tmp_path / ".vibeignore").write_text("custom_dir/\n*.tmp\n")
+        (tmp_path / ".albertignore").write_text("custom_dir/\n*.tmp\n")
         custom_dir = tmp_path / "custom_dir"
         custom_dir.mkdir()
         (custom_dir / "excluded.py").write_text("match\n")

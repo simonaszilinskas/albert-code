@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Mistral Vibe Installation Script
-# This script installs uv if not present and then installs mistral-vibe using uv
+# Albert Code Installation Script
+# This script installs uv if not present and then installs albert-code using uv
 
 set -euo pipefail
 
@@ -88,17 +88,17 @@ function check_vibe_installed() {
 }
 
 function install_vibe() {
-    info "Installing mistral-vibe from GitHub repository using uv..."
-    uv tool install mistral-vibe
+    info "Installing albert-code from GitHub repository using uv..."
+    uv tool install albert-code
 
-    success "Mistral Vibe installed successfully! (commands: vibe, vibe-acp)"
+    success "Albert Code installed successfully! (commands: vibe, vibe-acp)"
 }
 
 function update_vibe() {
-    info "Updating mistral-vibe from GitHub repository using uv..."
-    uv tool upgrade mistral-vibe
+    info "Updating albert-code from GitHub repository using uv..."
+    uv tool upgrade albert-code
 
-    success "Mistral Vibe updated successfully!"
+    success "Albert Code updated successfully!"
 }
 
 function main() {
@@ -113,7 +113,7 @@ function main() {
     echo "██████████████████░░"
     echo "██████████████████░░"
     echo
-    echo "Starting Mistral Vibe installation..."
+    echo "Starting Albert Code installation..."
     echo
 
     check_platform

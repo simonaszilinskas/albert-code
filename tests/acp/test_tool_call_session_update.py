@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from acp.schema import ToolCallStart
 
-from vibe.acp.tools.session_update import tool_call_session_update
-from vibe.core.tools.builtins.read_file import ReadFile, ReadFileArgs
-from vibe.core.types import ToolCallEvent
+from albert_code.acp.tools.session_update import tool_call_session_update
+from albert_code.core.tools.builtins.read_file import ReadFile, ReadFileArgs
+from albert_code.core.types import ToolCallEvent
 
 
 class TestToolCallSessionUpdate:

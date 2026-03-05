@@ -3,9 +3,9 @@ from __future__ import annotations
 import pytest
 
 from tests.conftest import build_test_agent_loop, build_test_vibe_config
-from vibe.core.agents.models import BUILTIN_AGENTS, CHAT, AgentProfile, BuiltinAgentName
-from vibe.core.config import VibeConfig
-from vibe.core.middleware import (
+from albert_code.core.agents.models import BUILTIN_AGENTS, CHAT, AgentProfile, BuiltinAgentName
+from albert_code.core.config import VibeConfig
+from albert_code.core.middleware import (
     CHAT_AGENT_EXIT,
     CHAT_AGENT_REMINDER,
     PLAN_AGENT_EXIT,
@@ -16,7 +16,7 @@ from vibe.core.middleware import (
     ReadOnlyAgentMiddleware,
     ResetReason,
 )
-from vibe.core.types import AgentStats, MessageList
+from albert_code.core.types import AgentStats, MessageList
 
 REMINDER = "test reminder"
 EXIT_MSG = "test exit"

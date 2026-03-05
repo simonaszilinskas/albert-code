@@ -12,18 +12,18 @@ import pytest
 from tests.conftest import build_test_agent_loop, build_test_vibe_config
 from tests.mock.utils import mock_llm_chunk
 from tests.stubs.fake_backend import FakeBackend
-from vibe.core.agents.models import BuiltinAgentName
-from vibe.core.config import VibeConfig
-from vibe.core.llm.exceptions import BackendErrorBuilder
-from vibe.core.middleware import (
+from albert_code.core.agents.models import BuiltinAgentName
+from albert_code.core.config import VibeConfig
+from albert_code.core.llm.exceptions import BackendErrorBuilder
+from albert_code.core.middleware import (
     ConversationContext,
     MiddlewareAction,
     MiddlewareResult,
     ResetReason,
 )
-from vibe.core.tools.base import BaseToolConfig, ToolPermission
-from vibe.core.tools.builtins.todo import TodoArgs
-from vibe.core.types import (
+from albert_code.core.tools.base import BaseToolConfig, ToolPermission
+from albert_code.core.tools.builtins.todo import TodoArgs
+from albert_code.core.types import (
     ApprovalResponse,
     AssistantEvent,
     FunctionCall,
@@ -36,7 +36,7 @@ from vibe.core.types import (
     ToolResultEvent,
     UserMessageEvent,
 )
-from vibe.core.utils import CancellationReason, get_user_cancellation_message
+from albert_code.core.utils import CancellationReason, get_user_cancellation_message
 
 
 class InjectBeforeMiddleware:

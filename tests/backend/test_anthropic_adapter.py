@@ -4,9 +4,9 @@ import json
 
 import pytest
 
-from vibe.core.config import ProviderConfig
-from vibe.core.llm.backend.anthropic import AnthropicAdapter, AnthropicMapper
-from vibe.core.types import (
+from albert_code.core.config import ProviderConfig
+from albert_code.core.llm.backend.anthropic import AnthropicAdapter, AnthropicMapper
+from albert_code.core.types import (
     AvailableFunction,
     AvailableTool,
     FunctionCall,

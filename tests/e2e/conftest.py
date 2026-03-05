@@ -37,7 +37,7 @@ def setup_e2e_env(
     vibe_home = tmp_path / "vibe-home"
     write_e2e_config(vibe_home, streaming_mock_server.api_base)
     monkeypatch.setenv("MISTRAL_API_KEY", "fake-key")
-    monkeypatch.setenv("VIBE_HOME", str(vibe_home))
+    monkeypatch.setenv("ALBERT_CODE_HOME", str(vibe_home))
     monkeypatch.setenv("TERM", "xterm-256color")
 
 
@@ -62,7 +62,7 @@ def spawned_vibe_process() -> SpawnedVibeFactory:
         captured = io.StringIO()
         child = pexpect.spawn(
             "uv",
-            ["run", "vibe", "--workdir", str(workdir)],
+            ["run", "albert-code", "--workdir", str(workdir)],
             cwd=str(TESTS_ROOT.parent),
             env=os.environ,
             encoding="utf-8",

@@ -7,16 +7,16 @@ import pytest
 from tests.conftest import build_test_agent_loop, build_test_vibe_config
 from tests.mock.utils import mock_llm_chunk
 from tests.stubs.fake_backend import FakeBackend
-from vibe.core.agents.models import BuiltinAgentName
-from vibe.core.config import (
+from albert_code.core.agents.models import BuiltinAgentName
+from albert_code.core.config import (
     Backend,
     ModelConfig,
     ProviderConfig,
     SessionLoggingConfig,
     VibeConfig,
 )
-from vibe.core.tools.base import BaseToolConfig, ToolPermission
-from vibe.core.types import (
+from albert_code.core.tools.base import BaseToolConfig, ToolPermission
+from albert_code.core.types import (
     AgentStats,
     AssistantEvent,
     CompactEndEvent,
@@ -44,7 +44,7 @@ def make_config(
 ) -> VibeConfig:
     models = [
         ModelConfig(
-            name="mistral-vibe-cli-latest",
+            name="albert-code-cli-latest",
             provider="mistral",
             alias="devstral-latest",
             input_price=input_price,

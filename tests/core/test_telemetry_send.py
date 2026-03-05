@@ -8,15 +8,15 @@ import pytest
 
 from tests.conftest import build_test_vibe_config
 from tests.stubs.fake_tool import FakeTool, FakeToolArgs
-from vibe.core.agent_loop import ToolDecision, ToolExecutionResponse
-from vibe.core.config import Backend
-from vibe.core.llm.format import ResolvedToolCall
-from vibe.core.telemetry.send import DATALAKE_EVENTS_URL, TelemetryClient
-from vibe.core.tools.base import BaseTool, ToolPermission
-from vibe.core.utils import get_user_agent
+from albert_code.core.agent_loop import ToolDecision, ToolExecutionResponse
+from albert_code.core.config import Backend
+from albert_code.core.llm.format import ResolvedToolCall
+from albert_code.core.telemetry.send import DATALAKE_EVENTS_URL, TelemetryClient
+from albert_code.core.tools.base import BaseTool, ToolPermission
+from albert_code.core.utils import get_user_agent
 
 _original_send_telemetry_event = TelemetryClient.send_telemetry_event
-from vibe.core.tools.builtins.write_file import WriteFile, WriteFileArgs
+from albert_code.core.tools.builtins.write_file import WriteFile, WriteFileArgs
 
 
 def _make_resolved_tool_call(
@@ -57,7 +57,7 @@ class TestTelemetryClient:
         client._client = MagicMock()
         client._client.post = AsyncMock()
 
-        client.send_telemetry_event("vibe.test", {})
+        client.send_telemetry_event("albert_code.test", {})
         _run_telemetry_tasks()
 
         client._client.post.assert_not_called()
@@ -77,7 +77,7 @@ class TestTelemetryClient:
         client._client = MagicMock()
         client._client.post = AsyncMock()
 
-        client.send_telemetry_event("vibe.test", {})
+        client.send_telemetry_event("albert_code.test", {})
         _run_telemetry_tasks()
 
         client._client.post.assert_not_called()
@@ -100,12 +100,12 @@ class TestTelemetryClient:
         client._client.post = mock_post
         client._client.aclose = AsyncMock()
 
-        client.send_telemetry_event("vibe.test_event", {"key": "value"})
+        client.send_telemetry_event("albert_code.test_event", {"key": "value"})
         await client.aclose()
 
         mock_post.assert_called_once_with(
             DATALAKE_EVENTS_URL,
-            json={"event": "vibe.test_event", "properties": {"key": "value"}},
+            json={"event": "albert_code.test_event", "properties": {"key": "value"}},
             headers={
                 "Content-Type": "application/json",
                 "Authorization": "Bearer sk-test",
@@ -132,7 +132,7 @@ class TestTelemetryClient:
 
         assert len(telemetry_events) == 1
         event_name = telemetry_events[0]["event_name"]
-        assert event_name == "vibe.tool_call_finished"
+        assert event_name == "albert_code.tool_call_finished"
         properties = telemetry_events[0]["properties"]
         assert properties["tool_name"] == "todo"
         assert properties["status"] == "success"
@@ -204,7 +204,7 @@ class TestTelemetryClient:
         client.send_user_copied_text("hello world")
 
         assert len(telemetry_events) == 1
-        assert telemetry_events[0]["event_name"] == "vibe.user_copied_text"
+        assert telemetry_events[0]["event_name"] == "albert_code.user_copied_text"
         assert telemetry_events[0]["properties"]["text_length"] == 11
 
     def test_send_user_cancelled_action_payload(
@@ -216,7 +216,7 @@ class TestTelemetryClient:
         client.send_user_cancelled_action("interrupt_agent")
 
         assert len(telemetry_events) == 1
-        assert telemetry_events[0]["event_name"] == "vibe.user_cancelled_action"
+        assert telemetry_events[0]["event_name"] == "albert_code.user_cancelled_action"
         assert telemetry_events[0]["properties"]["action"] == "interrupt_agent"
 
     def test_send_auto_compact_triggered_payload(
@@ -228,7 +228,7 @@ class TestTelemetryClient:
         client.send_auto_compact_triggered()
 
         assert len(telemetry_events) == 1
-        assert telemetry_events[0]["event_name"] == "vibe.auto_compact_triggered"
+        assert telemetry_events[0]["event_name"] == "albert_code.auto_compact_triggered"
 
     def test_send_slash_command_used_payload(
         self, telemetry_events: list[dict[str, Any]]
@@ -240,7 +240,7 @@ class TestTelemetryClient:
         client.send_slash_command_used("my_skill", "skill")
 
         assert len(telemetry_events) == 2
-        assert telemetry_events[0]["event_name"] == "vibe.slash_command_used"
+        assert telemetry_events[0]["event_name"] == "albert_code.slash_command_used"
         assert telemetry_events[0]["properties"]["command"] == "help"
         assert telemetry_events[0]["properties"]["command_type"] == "builtin"
         assert telemetry_events[1]["properties"]["command"] == "my_skill"
@@ -263,7 +263,7 @@ class TestTelemetryClient:
 
         assert len(telemetry_events) == 1
         event_name = telemetry_events[0]["event_name"]
-        assert event_name == "vibe.new_session"
+        assert event_name == "albert_code.new_session"
         properties = telemetry_events[0]["properties"]
         assert properties["has_agents_md"] is True
         assert properties["nb_skills"] == 2

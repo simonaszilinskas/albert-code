@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, PropertyMock
 
 import pytest
 
-from vibe.cli.textual_ui.notifications import (
+from albert_code.cli.textual_ui.notifications import (
     NotificationContext,
     TextualNotificationAdapter,
 )

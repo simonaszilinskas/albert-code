@@ -9,11 +9,11 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 
 from tests.conftest import build_test_vibe_config
-from vibe.core.agents.models import AgentProfile, AgentSafety
-from vibe.core.config import SessionLoggingConfig, VibeConfig
-from vibe.core.session.session_logger import SessionLogger
-from vibe.core.tools.manager import ToolManager
-from vibe.core.types import AgentStats, LLMMessage, Role, SessionMetadata
+from albert_code.core.agents.models import AgentProfile, AgentSafety
+from albert_code.core.config import SessionLoggingConfig, VibeConfig
+from albert_code.core.session.session_logger import SessionLogger
+from albert_code.core.tools.manager import ToolManager
+from albert_code.core.types import AgentStats, LLMMessage, Role, SessionMetadata
 
 
 @pytest.fixture
@@ -107,8 +107,8 @@ class TestSessionLoggerInitialization:
 
 
 class TestSessionLoggerMetadata:
-    @patch("vibe.core.session.session_logger.subprocess.run")
-    @patch("vibe.core.session.session_logger.getpass.getuser")
+    @patch("albert_code.core.session.session_logger.subprocess.run")
+    @patch("albert_code.core.session.session_logger.getpass.getuser")
     def test_session_metadata_initialization(
         self, mock_getuser, mock_subprocess, session_config: SessionLoggingConfig
     ) -> None:
@@ -140,8 +140,8 @@ class TestSessionLoggerMetadata:
         assert "working_directory" in metadata.environment
         assert metadata.environment["working_directory"] == str(Path.cwd())
 
-    @patch("vibe.core.session.session_logger.subprocess.run")
-    @patch("vibe.core.session.session_logger.getpass.getuser")
+    @patch("albert_code.core.session.session_logger.subprocess.run")
+    @patch("albert_code.core.session.session_logger.getpass.getuser")
     def test_session_metadata_with_git_errors(
         self, mock_getuser, mock_subprocess, session_config: SessionLoggingConfig
     ) -> None:
@@ -528,7 +528,7 @@ class TestSessionLoggerSaveInteraction:
             ) as persist_metadata_mock,
             patch.object(logger, "cleanup_tmp_files", cleanup_spy),
             patch(
-                "vibe.core.session.session_logger.utc_now",
+                "albert_code.core.session.session_logger.utc_now",
                 # a bit brittle, but required for the call-count choregraphy...
                 side_effect=[
                     datetime(2026, 1, 1, 10, 0, 0, tzinfo=UTC),
@@ -767,7 +767,7 @@ class TestSessionLoggerCleanupTmpFiles:
         with (
             patch.object(logger, "cleanup_tmp_files", cleanup_spy),
             patch(
-                "vibe.core.session.session_logger.utc_now",
+                "albert_code.core.session.session_logger.utc_now",
                 side_effect=[
                     datetime(2026, 1, 1, 10, 0, 0, tzinfo=UTC),
                     datetime(2026, 1, 1, 10, 0, 1, tzinfo=UTC),

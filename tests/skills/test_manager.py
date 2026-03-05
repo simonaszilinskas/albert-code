@@ -6,9 +6,9 @@ import pytest
 
 from tests.conftest import build_test_vibe_config
 from tests.skills.conftest import create_skill
-from vibe.core.config import VibeConfig
-from vibe.core.skills.manager import SkillManager
-from vibe.core.trusted_folders import trusted_folders_manager
+from albert_code.core.config import VibeConfig
+from albert_code.core.skills.manager import SkillManager
+from albert_code.core.trusted_folders import trusted_folders_manager
 
 
 @pytest.fixture
@@ -189,7 +189,7 @@ class TestSkillManagerSearchPaths:
         self, tmp_working_directory: Path
     ) -> None:
         trusted_folders_manager.add_trusted(tmp_working_directory)
-        vibe_skills = tmp_working_directory / ".vibe" / "skills"
+        vibe_skills = tmp_working_directory / ".albert-code" / "skills"
         vibe_skills.mkdir(parents=True)
         create_skill(vibe_skills, "vibe-skill", "Skill from .vibe/skills")
 
@@ -227,11 +227,11 @@ class TestSkillManagerSearchPaths:
         self, tmp_working_directory: Path
     ) -> None:
         trusted_folders_manager.add_trusted(tmp_working_directory)
-        vibe_skills = tmp_working_directory / ".vibe" / "skills"
+        vibe_skills = tmp_working_directory / ".albert-code" / "skills"
         agents_skills = tmp_working_directory / ".agents" / "skills"
         vibe_skills.mkdir(parents=True)
         agents_skills.mkdir(parents=True)
-        create_skill(vibe_skills, "vibe-only", "From .vibe")
+        create_skill(vibe_skills, "vibe-only", "From .albert-code")
         create_skill(agents_skills, "agents-only", "From .agents")
 
         config = build_test_vibe_config(
@@ -240,18 +240,18 @@ class TestSkillManagerSearchPaths:
         manager = SkillManager(lambda: config)
 
         assert len(manager.available_skills) == 2
-        assert manager.available_skills["vibe-only"].description == "From .vibe"
+        assert manager.available_skills["vibe-only"].description == "From .albert-code"
         assert manager.available_skills["agents-only"].description == "From .agents"
 
     def test_first_discovered_wins_when_same_skill_in_vibe_and_agents(
         self, tmp_working_directory: Path
     ) -> None:
         trusted_folders_manager.add_trusted(tmp_working_directory)
-        vibe_skills = tmp_working_directory / ".vibe" / "skills"
+        vibe_skills = tmp_working_directory / ".albert-code" / "skills"
         agents_skills = tmp_working_directory / ".agents" / "skills"
         vibe_skills.mkdir(parents=True)
         agents_skills.mkdir(parents=True)
-        create_skill(vibe_skills, "shared-skill", "First from .vibe")
+        create_skill(vibe_skills, "shared-skill", "First from .albert-code")
         create_skill(agents_skills, "shared-skill", "Second from .agents")
 
         config = build_test_vibe_config(
@@ -261,7 +261,7 @@ class TestSkillManagerSearchPaths:
 
         assert len(manager.available_skills) == 1
         assert (
-            manager.available_skills["shared-skill"].description == "First from .vibe"
+            manager.available_skills["shared-skill"].description == "First from .albert-code"
         )
 
     def test_discovers_from_multiple_skill_paths(self, tmp_path: Path) -> None:

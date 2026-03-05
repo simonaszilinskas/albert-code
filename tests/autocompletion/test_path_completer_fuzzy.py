@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from vibe.core.autocompletion.completers import PathCompleter
+from albert_code.core.autocompletion.completers import PathCompleter
 
 
 @pytest.fixture()
