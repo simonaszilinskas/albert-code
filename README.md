@@ -17,8 +17,9 @@
 
 ```bash
 uv tool install "albert-code @ git+https://github.com/simonaszilinskas/albert-code"
-albert-code --api-key TA_CLE_API
 ```
+
+Au premier lancement, albert-code te demandera ta clé API.
 
 ## 3 -Utilisation
 
