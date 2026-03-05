@@ -169,9 +169,13 @@ class OpenAIAdapter(APIAdapter):
         for idx, match in enumerate(self._TOOL_CALL_RE.finditer(content)):
             func_name = match.group(1)
             body = match.group(2)
-            params: dict[str, str] = {}
+            params: dict[str, Any] = {}
             for pm in self._PARAM_RE.finditer(body):
-                params[pm.group(1)] = pm.group(2).strip()
+                raw = pm.group(2).strip()
+                try:
+                    params[pm.group(1)] = json.loads(raw)
+                except (json.JSONDecodeError, ValueError):
+                    params[pm.group(1)] = raw
             tool_calls.append(
                 ToolCall(
                     id=f"tc-{uuid4().hex[:12]}",
