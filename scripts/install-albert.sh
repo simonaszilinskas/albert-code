@@ -32,7 +32,7 @@ fi
 # 2. Install albert-code as a CLI tool
 # ---------------------------------------------------------------------------
 echo ">> Installing albert-code..."
-uv tool install "albert-code @ git+https://github.com/mistralai/albert-code"
+uv tool install "albert-code @ git+https://github.com/simonaszilinskas/albert-code"
 
 # ---------------------------------------------------------------------------
 # 3. Write Albert config
