@@ -22,7 +22,7 @@ PROVIDER_HELP = {
     "mistral": ("https://console.mistral.ai/codestral/cli", "Mistral AI Studio")
 }
 CONFIG_DOCS_URL = (
-    "https://github.com/mistralai/albert-code?tab=readme-ov-file#configuration"
+    "https://github.com/simonaszilinskas/albert-code#readme"
 )
 
 
@@ -60,7 +60,7 @@ class ApiKeyScreen(OnboardingScreen):
         )
 
     def _compose_config_docs(self) -> ComposeResult:
-        yield Static("[dim]Learn more about Vibe configuration:[/]")
+        yield Static("[dim]Learn more about Albert Code:[/]")
         yield Horizontal(
             NoMarkupStatic("→ ", classes="link-chevron"),
             Link(CONFIG_DOCS_URL, url=CONFIG_DOCS_URL),
@@ -73,7 +73,7 @@ class ApiKeyScreen(OnboardingScreen):
         self.input_widget = Input(
             password=True,
             id="key",
-            placeholder="Paste your API key here",
+            placeholder="Paste your Albert API key here",
             validators=[Length(minimum=1, failure_description="No API key provided.")],
         )
 
